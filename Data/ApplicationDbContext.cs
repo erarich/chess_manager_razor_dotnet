@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using api_mvc.Models;
 
 namespace api_mvc.Data
 {
@@ -9,5 +10,6 @@ namespace api_mvc.Data
             : base(options)
         {
         }
+        public DbSet<api_mvc.Models.TournamentViewModel> TournamentViewModel { get; set; } = default!;
     }
 }
