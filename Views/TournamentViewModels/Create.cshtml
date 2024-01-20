@@ -4,46 +4,28 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Create</h1>
-
-<h4>TournamentViewModel</h4>
+<h4 class="text-center">Create Tournament</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row text-center">
+    <div class="col-md-4 mx-auto">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group custom-margin">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsFinished" /> @Html.DisplayNameFor(model => model.IsFinished)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsStarted" /> @Html.DisplayNameFor(model => model.IsStarted)
-                </label>
-            </div>
-            <div class="form-group">
+            <div class="form-group custom-margin">
                 <label asp-for="PlayersNumber" class="control-label"></label>
                 <input asp-for="PlayersNumber" class="form-control" />
                 <span asp-validation-for="PlayersNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group custom-margin">
                 <label asp-for="RoundsNumber" class="control-label"></label>
                 <input asp-for="RoundsNumber" class="form-control" />
                 <span asp-validation-for="RoundsNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CreatedDate" class="control-label"></label>
-                <input asp-for="CreatedDate" class="form-control" />
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-group custom-margin">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -53,6 +35,12 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<style>
+    .custom-margin {
+        margin-bottom: 1rem; /* Ajuste o valor conforme necessário */
+    }
+</style>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

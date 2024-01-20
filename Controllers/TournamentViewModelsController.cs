@@ -46,6 +46,12 @@ namespace api_mvc.Controllers
                 return NotFound();
             }
 
+            var userId = _userManager.GetUserId(User);
+            if (tournamentViewModel.OwnerUserId != userId)
+            {
+                return Forbid();
+            }
+
             return View(tournamentViewModel);
         }
 
@@ -130,6 +136,12 @@ namespace api_mvc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            var userId = _userManager.GetUserId(User);
+            if (tournamentViewModel.OwnerUserId != userId)
+            {
+                return Forbid();
+            }
             return View(tournamentViewModel);
         }
 
@@ -146,6 +158,12 @@ namespace api_mvc.Controllers
             if (tournamentViewModel == null)
             {
                 return NotFound();
+            }
+
+            var userId = _userManager.GetUserId(User);
+            if (tournamentViewModel.OwnerUserId != userId)
+            {
+                return Forbid();
             }
 
             return View(tournamentViewModel);
