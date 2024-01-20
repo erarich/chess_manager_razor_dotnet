@@ -98,6 +98,13 @@ namespace api_mvc.Controllers
             {
                 return NotFound();
             }
+
+            var userId = _userManager.GetUserId(User);
+            if (tournamentViewModel.OwnerUserId != userId)
+            {
+                return Forbid();
+            }
+
             return View(tournamentViewModel);
         }
 
@@ -111,6 +118,12 @@ namespace api_mvc.Controllers
             if (id != tournamentViewModel.Id)
             {
                 return NotFound();
+            }
+
+            var userId = _userManager.GetUserId(User);
+            if (tournamentViewModel.OwnerUserId != userId)
+            {
+                return Forbid();
             }
 
             if (ModelState.IsValid)
@@ -137,11 +150,7 @@ namespace api_mvc.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            var userId = _userManager.GetUserId(User);
-            if (tournamentViewModel.OwnerUserId != userId)
-            {
-                return Forbid();
-            }
+
             return View(tournamentViewModel);
         }
 
@@ -187,6 +196,19 @@ namespace api_mvc.Controllers
         private bool TournamentViewModelExists(long id)
         {
             return _context.TournamentViewModel.Any(e => e.Id == id);
+        }
+
+        // GET: TournamentViewModels/MyTournaments
+        public async Task<IActionResult> MyTournaments()
+        {
+            var userId = _userManager.GetUserId(User);
+
+            // Retrieve tournaments where the owner is the current user
+            var myTournaments = await _context.TournamentViewModel
+                .Where(t => t.OwnerUserId == userId)
+                .ToListAsync();
+
+            return View(myTournaments);
         }
     }
 }
