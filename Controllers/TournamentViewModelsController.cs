@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using api_mvc.Data;
 using api_mvc.Models;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace api_mvc.Controllers
@@ -16,10 +17,12 @@ namespace api_mvc.Controllers
     public class TournamentViewModelsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public TournamentViewModelsController(ApplicationDbContext context)
+        public TournamentViewModelsController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: TournamentViewModels
@@ -57,10 +60,18 @@ namespace api_mvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,IsFinished,IsStarted,PlayersNumber,RoundsNumber,CreatedDate")] TournamentViewModel tournamentViewModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,PlayersNumber,RoundsNumber")] TournamentViewModel tournamentViewModel)
         {
             if (ModelState.IsValid)
             {
+                var ownerUserId = _userManager.GetUserId(User);
+                tournamentViewModel.OwnerUserId = ownerUserId;
+
+                tournamentViewModel.IsFinished = false;
+                tournamentViewModel.IsStarted = false;
+                tournamentViewModel.CreatedDate = DateTime.Now;
+
+
                 _context.Add(tournamentViewModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -89,7 +100,7 @@ namespace api_mvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,Name,IsFinished,IsStarted,PlayersNumber,RoundsNumber,CreatedDate")] TournamentViewModel tournamentViewModel)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,Name,IsFinished,IsStarted,PlayersNumber,RoundsNumber")] TournamentViewModel tournamentViewModel)
         {
             if (id != tournamentViewModel.Id)
             {
@@ -100,6 +111,9 @@ namespace api_mvc.Controllers
             {
                 try
                 {
+                    var ownerUserId = _userManager.GetUserId(User);
+                    tournamentViewModel.OwnerUserId = ownerUserId;
+
                     _context.Update(tournamentViewModel);
                     await _context.SaveChangesAsync();
                 }

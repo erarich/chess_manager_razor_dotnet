@@ -11,5 +11,17 @@ namespace api_mvc.Data
         {
         }
         public DbSet<api_mvc.Models.TournamentViewModel> TournamentViewModel { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Configuração da chave estrangeira
+            modelBuilder.Entity<TournamentViewModel>()
+                .HasOne(t => t.OwnerUser)
+                .WithMany()
+                .HasForeignKey(t => t.OwnerUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
     }
 }

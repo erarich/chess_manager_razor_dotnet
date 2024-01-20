@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Numerics;
+using Microsoft.AspNetCore.Identity;
 
 namespace api_mvc.Models
 {
@@ -13,5 +14,8 @@ namespace api_mvc.Models
         public int RoundsNumber { get; set; }
         [DataType(DataType.Date)]
         public DateTime CreatedDate { get; set; }
+
+        public string? OwnerUserId { get; set; }
+        public IdentityUser? OwnerUser { get; set; }
     }
 }
