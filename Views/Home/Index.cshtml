@@ -10,6 +10,16 @@
 @if (SignInManager.IsSignedIn(User))
 {
         <h1 class="display-4">Create tournament</h1>
+        <button 
+            type="button" 
+            class="btn btn-primary">
+                <a 
+                    class="nav-link text-dark" 
+                    asp-area="" 
+                    asp-controller="TournamentViewModels" 
+                    asp-action="Index">Tournaments</a>
+         </button>
+        
 }
 else
 {
