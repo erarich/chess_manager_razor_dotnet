@@ -16,12 +16,12 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group custom-margin">
-                <label asp-for="PlayersNumber" class="control-label"></label>
+                <label asp-for="PlayersNumber" class="control-label">Player's Limit</label>
                 <input asp-for="PlayersNumber" class="form-control" />
                 <span asp-validation-for="PlayersNumber" class="text-danger"></span>
             </div>
             <div class="form-group custom-margin">
-                <label asp-for="RoundsNumber" class="control-label"></label>
+                <label asp-for="RoundsNumber" class="control-label">Total Rounds</label>
                 <input asp-for="RoundsNumber" class="form-control" />
                 <span asp-validation-for="RoundsNumber" class="text-danger"></span>
             </div>
@@ -30,10 +30,6 @@
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 <style>

@@ -5,46 +5,41 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>TournamentViewModel</h4>
+<h4 class="text-center">Edit Tournament</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row text-center">
+    <div class="col-md-4  mx-auto">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
+            <div class="form-group custom-margin">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsFinished" /> @Html.DisplayNameFor(model => model.IsFinished)
-                </label>
+            <div class="d-inline-flex justify-content-between">
+                <div class="form-group form-check custom-margin">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsFinished" /> @Html.DisplayNameFor(model => model.IsFinished)
+                    </label>
+                </div>
+                <div class="form-group form-check custom-margin">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsStarted" /> @Html.DisplayNameFor(model => model.IsStarted)
+                    </label>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsStarted" /> @Html.DisplayNameFor(model => model.IsStarted)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="PlayersNumber" class="control-label"></label>
+            <div class="form-group custom-margin">
+                <label asp-for="PlayersNumber" class="control-label">Player's Limit</label>
                 <input asp-for="PlayersNumber" class="form-control" />
                 <span asp-validation-for="PlayersNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="RoundsNumber" class="control-label"></label>
+            <div class="form-group custom-margin">
+                <label asp-for="RoundsNumber" class="control-label">Total Rounds</label>
                 <input asp-for="RoundsNumber" class="form-control" />
                 <span asp-validation-for="RoundsNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CreatedDate" class="control-label"></label>
-                <input asp-for="CreatedDate" class="form-control" />
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-group custom-margin">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -52,8 +47,18 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="My Tournaments">Back to My Tournaments</a>
 </div>
+
+<style>
+    .custom-margin {
+        margin-bottom: 1rem; 
+    }
+
+    .form-group.form-check.custom-margin {
+        margin-right: 1rem; 
+    }
+</style>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
