@@ -64,7 +64,9 @@
 <div class="players-list">
     <hr />
     <h4>Player's List</h4>
-    <button type="button" class="btn btn-primary">Add Player</button>
+    <button type="button" class="btn btn-primary">
+        <a class="nav-link text-dark" asp-action="Create" asp-controller="PlayerViewModels" asp-route-tournamentId="@Model.Id">Add Player</a>
+    </button>
 </div>
 
 <style>
