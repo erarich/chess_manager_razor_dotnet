@@ -57,7 +57,7 @@ namespace api_mvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int tournamentId, [Bind("Id,Name,Age")] PlayerViewModel playerViewModel)
+        public async Task<IActionResult> Create(long tournamentId, [Bind("Id,Name,Age, TournamentId")] PlayerViewModel playerViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +65,7 @@ namespace api_mvc.Controllers
                 _context.Add(playerViewModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
             }
             ViewData["TournamentId"] = new SelectList(_context.TournamentViewModel, "Id", "Id", playerViewModel.TournamentId);
             return View(playerViewModel);

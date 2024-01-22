@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
+    var tournamentId = TempData["TournamentId"];
 }
 
 <h1>Create</h1>
@@ -12,6 +13,7 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TournamentId" value="@tournamentId" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -31,6 +33,7 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
+    <p>@tournamentId</p>
 </div>
 
 @section Scripts {
