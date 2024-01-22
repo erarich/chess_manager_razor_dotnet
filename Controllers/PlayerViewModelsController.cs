@@ -57,10 +57,11 @@ namespace api_mvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Age,TournamentId")] PlayerViewModel playerViewModel)
+        public async Task<IActionResult> Create(int tournamentId, [Bind("Id,Name,Age")] PlayerViewModel playerViewModel)
         {
             if (ModelState.IsValid)
             {
+                playerViewModel.TournamentId = tournamentId;
                 _context.Add(playerViewModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -91,7 +92,7 @@ namespace api_mvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,Name,Age,TournamentId")] PlayerViewModel playerViewModel)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,Name,Age")] PlayerViewModel playerViewModel)
         {
             if (id != playerViewModel.Id)
             {
