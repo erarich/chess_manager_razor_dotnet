@@ -26,6 +26,15 @@ namespace api_mvc.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        public ActionResult PlayerList(int tournamentId)
+        {
+            // Obtenha a lista de jogadores com base no torneio
+            var filteredPlayers = _context.PlayerViewModel.Where(p => p.TournamentId == tournamentId).ToList();
+
+            // Passe a lista de jogadores para a visão parcial
+            return PartialView("_YourFirstViewFileName", filteredPlayers);
+        }
+
         // GET: PlayerViewModels/Details/5
         public async Task<IActionResult> Details(long? id)
         {

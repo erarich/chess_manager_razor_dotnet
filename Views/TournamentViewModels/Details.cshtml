@@ -64,12 +64,12 @@
 <div class="players-list">
     <hr />
     <h4>Player's List</h4>
-    <p>Tournament Id: @Model?.Id</p>
-    <p>Tournament Id Type: @Model?.Id.GetType()</p>
     @{
         TempData["TournamentId"] = Model?.Id.ToString();
     }
     @Html.ActionLink("Add Player", "Create", "PlayerViewModels", null, new { @class = "btn btn-primary" })
+    <div class="players-list-container">
+    </div>
 
 </div>
 
