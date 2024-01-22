@@ -69,6 +69,10 @@
     }
     @Html.ActionLink("Add Player", "Create", "PlayerViewModels", null, new { @class = "btn btn-primary" })
     <div class="players-list-container">
+        @await Html.PartialAsync("~/Views/PlayerViewModels/_PlayerList.cshtml", new ViewDataDictionary(ViewData)
+        {
+        {"TournamentId", Model.Id}
+        })
     </div>
 
 </div>

@@ -28,11 +28,9 @@ namespace api_mvc.Controllers
 
         public ActionResult PlayerList(int tournamentId)
         {
-            // Obtenha a lista de jogadores com base no torneio
             var filteredPlayers = _context.PlayerViewModel.Where(p => p.TournamentId == tournamentId).ToList();
 
-            // Passe a lista de jogadores para a visão parcial
-            return PartialView("_YourFirstViewFileName", filteredPlayers);
+            return PartialView("~/Views/PlayerViewModels/_PlayerList.cshtml", filteredPlayers);
         }
 
         // GET: PlayerViewModels/Details/5
