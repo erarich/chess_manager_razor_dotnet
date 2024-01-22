@@ -6,7 +6,6 @@
 }
 
 <div>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
@@ -61,3 +60,15 @@
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="MyTournaments">Back to My Tournaments</a>
 </div>
+
+<div class="players-list">
+    <hr />
+    <h4>Player's List</h4>
+
+</div>
+
+<style>
+    .players-list {
+        margin-top: 30px;
+    }
+</style>
