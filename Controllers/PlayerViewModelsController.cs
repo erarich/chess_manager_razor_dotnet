@@ -30,7 +30,7 @@ namespace api_mvc.Controllers
         {
             var filteredPlayers = _context.PlayerViewModel.Where(p => p.TournamentId == tournamentId).ToList();
 
-            return PartialView("~/Views/PlayerViewModels/_PlayerList.cshtml", filteredPlayers);
+            return View("~/Views/PlayerViewModels/PlayerList.cshtml", filteredPlayers);
         }
 
         // GET: PlayerViewModels/Details/5
