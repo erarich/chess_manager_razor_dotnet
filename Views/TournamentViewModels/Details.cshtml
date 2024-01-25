@@ -68,6 +68,7 @@
         TempData["TournamentId"] = Model?.Id.ToString();
     }
     @Html.ActionLink("Add Player", "Create", "PlayerViewModels", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Ver Jogadores", "PlayerList", "PlayerViewModels", new { tournamentId = @Model?.Id }, new { @class = "btn btn-primary" })
 
 </div>
 
