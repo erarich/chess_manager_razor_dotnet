@@ -10,21 +10,21 @@ namespace api_mvc.Data
             : base(options)
         {
         }
-        public DbSet<api_mvc.Models.TournamentViewModel> TournamentViewModel { get; set; } = default!;
-        public DbSet<PlayerViewModel> PlayerViewModel { get; set; } = default!;
+        public DbSet<api_mvc.Models.Tournament> TournamentViewModel { get; set; } = default!;
+        public DbSet<Player> PlayerViewModel { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             // Configuração da chave estrangeira
-            modelBuilder.Entity<TournamentViewModel>()
+            modelBuilder.Entity<Tournament>()
                 .HasOne(t => t.OwnerUser)
                 .WithMany()
                 .HasForeignKey(t => t.OwnerUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<PlayerViewModel>()
+            modelBuilder.Entity<Player>()
                 .HasOne(p => p.Tournament)
                 .WithMany()
                 .HasForeignKey(p => p.TournamentId)

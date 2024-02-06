@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-
+using Microsoft.EntityFrameworkCore;
 using api_mvc.Data;
-using api_mvc.Extensions;
 
 public class Startup
 {
@@ -15,9 +14,15 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
 
-        services.SetupDatabase(Configuration);
+        var connectionString = Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+        services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(connectionString));
+        
+        services.AddDatabaseDeveloperPageExceptionFilter();
+
         services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<ApplicationDbContext>();
+
         services.AddControllersWithViews();
     }
 
@@ -36,6 +41,7 @@ public class Startup
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
+        app.UseAuthentication();
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {
