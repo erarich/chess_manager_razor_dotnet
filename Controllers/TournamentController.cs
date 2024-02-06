@@ -26,12 +26,15 @@ namespace api_mvc.Controllers
         }
 
         // GET: TournamentViewModels
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.TournamentViewModel.ToListAsync());
         }
 
+
         // GET: TournamentViewModels/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -46,20 +49,24 @@ namespace api_mvc.Controllers
                 return NotFound();
             }
 
+            /* 
             var userId = _userManager.GetUserId(User);
             if (tournamentViewModel.OwnerUserId != userId)
             {
                 return Forbid();
             }
+            */
 
             return View(tournamentViewModel);
         }
+
 
         // GET: TournamentViewModels/Create
         public IActionResult Create()
         {
             return View();
         }
+
 
         // POST: TournamentViewModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -85,6 +92,7 @@ namespace api_mvc.Controllers
             return View(tournamentViewModel);
         }
 
+
         // GET: TournamentViewModels/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
@@ -107,6 +115,7 @@ namespace api_mvc.Controllers
 
             return View(tournamentViewModel);
         }
+
 
         // POST: TournamentViewModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -154,6 +163,7 @@ namespace api_mvc.Controllers
             return View(tournamentViewModel);
         }
 
+
         // GET: TournamentViewModels/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
@@ -178,6 +188,7 @@ namespace api_mvc.Controllers
             return View(tournamentViewModel);
         }
 
+
         // POST: TournamentViewModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -193,10 +204,12 @@ namespace api_mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
         private bool TournamentViewModelExists(long id)
         {
             return _context.TournamentViewModel.Any(e => e.Id == id);
         }
+
 
         // GET: TournamentViewModels/MyTournaments
         public async Task<IActionResult> MyTournaments()

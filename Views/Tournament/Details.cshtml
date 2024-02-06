@@ -57,8 +57,11 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="MyTournaments">Back to My Tournaments</a>
+    @if (User.Identity.IsAuthenticated && Model.OwnerUserId == User.Identity.Name)
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+        @Html.ActionLink("Add Player", "Create", "PlayerViewModels", null, new { @class = "btn btn-primary" })
+    }
 </div>
 
 <div class="players-list">
@@ -67,9 +70,8 @@
     @{
         TempData["TournamentId"] = Model?.Id.ToString();
     }
-    @Html.ActionLink("Add Player", "Create", "PlayerViewModels", null, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Ver Jogadores", "PlayerList", "PlayerViewModels", new { tournamentId = @Model?.Id }, new { @class = "btn btn-primary" })
-
+  
+    @await Html.PartialAsync("~/Views/Player/PlayerList.cshtml", TempData["TournamentId"])
 </div>
 
 <style>
