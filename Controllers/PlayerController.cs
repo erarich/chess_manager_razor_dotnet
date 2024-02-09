@@ -26,9 +26,10 @@ namespace api_mvc.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        public ActionResult PlayerList(int tournamentId)
+        public async Task<IActionResult> PlayerList(int tournamentId)
         {
-            var filteredPlayers = _context.PlayerViewModel.Where(p => p.TournamentId == tournamentId).ToList();
+            var filteredPlayers = await _context.PlayerViewModel.Where(p => p.TournamentId == tournamentId).ToListAsync();
+            ViewBag.TournamentId = tournamentId;
 
             return PartialView("~/Views/Player/PlayerList.cshtml", filteredPlayers);
         }

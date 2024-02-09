@@ -71,7 +71,7 @@
         TempData["TournamentId"] = Model?.Id.ToString();
     }
   
-    @await Html.PartialAsync("~/Views/Player/PlayerList.cshtml", TempData["TournamentId"])
+    @await Html.PartialAsync("~/Views/Player/PlayerList.cshtml", @Model?.Id)
 </div>
 
 <style>
