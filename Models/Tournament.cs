@@ -17,5 +17,6 @@ namespace api_mvc.Models
 
         public string? OwnerUserId { get; set; }
         public IdentityUser? OwnerUser { get; set; }
+        public List<Player> Players { get; set; }
     }
 }

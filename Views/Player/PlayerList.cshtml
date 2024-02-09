@@ -1,39 +1,21 @@
-﻿@model IEnumerable<api_mvc.Models.Player>
+﻿@model List<Player>
 
-@{
-    ViewData["Title"] = "PlayerList";
-}
-
-<h4>Player's List for Tournament @ViewBag.TournamentId</h4>
+<h2>Players List</h2>
 
 <table class="table">
     <thead>
         <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Age
-            </th>
-            <th></th>
+            <th>Player Name</th>
+            <th>Score</th>
+            <!-- Adicione mais colunas conforme necessário -->
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var player in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Age)
-                </td>
-
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
+                <td>@player.Name</td>
+                <!-- Adicione mais colunas conforme necessário -->
             </tr>
         }
     </tbody>

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using api_mvc.Data;
 using api_mvc.Models;
 using Microsoft.AspNetCore.Identity;
+using api_mvc.Data.Migrations;
 
 
 namespace api_mvc.Controllers
@@ -49,15 +50,11 @@ namespace api_mvc.Controllers
                 return NotFound();
             }
 
-            /* 
-            var userId = _userManager.GetUserId(User);
-            if (tournamentViewModel.OwnerUserId != userId)
-            {
-                return Forbid();
-            }
-            */
+            var players = await _context.PlayerViewModel
+                .Where(p => p.TournamentId == tournamentViewModel.Id)
+                .ToListAsync();
 
-            return View(tournamentViewModel);
+            return View(players);
         }
 
 
@@ -222,6 +219,29 @@ namespace api_mvc.Controllers
                 .ToListAsync();
 
             return View(myTournaments);
+        }
+
+        // GET: Tournament/Players/5
+        public async Task<IActionResult> Players(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+
+            var tournament = await _context.TournamentViewModel
+            .FirstOrDefaultAsync(m => m.Id == id);
+                if (tournament == null)
+                {
+                    return NotFound();
+                }
+
+            var players = await _context.PlayerViewModel
+                .Where(p => p.TournamentId == tournament.Id)
+                .ToListAsync();
+
+            return View(players);
         }
     }
 }
